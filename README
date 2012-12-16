@@ -1,0 +1,63 @@
+ DO NOT UNDER ANY CIRCUMSTANCES:
+--------------------------------
+Do not use any of the files in or under this folder 
+unless you understand the consequences of doing so 
+and are comfortable with the possibility of losing 
+everything in your indexer. If you come to IRC ask-
+ing for help because everythings gone you will get
+none. THIS IS FOR DEVELOPMENT TESTING ONLY!
+
+PLACING THIS FOLDER
+-------------------
+Place all the files in this repo into misc/testing/innodb.
+You can do this by:
+
+* cd /path/to/your/newznab/misc/testing/
+* git clone git://github.com/itandrew/Newznab-InnoDB-Dropin.git innodb
+
+BUGS
+-----
+If you find bugs... please please please report them to me so I can 
+fix them. There has already been a few I've fixed before this initial 
+commit. So do expect bugs and do report so I can fix them.
+
+WHATS ACTUALLY CHANGED
+----------------------
+Despite there being a large number of files in this
+folder, only a few files have changed. The files are
+nzb-import.php, lib/framework/db.php, lib/innodb/bac
+kfill.php, and lib/innodb/binaries.php. For your conv
+enience I have included the convertToInnodDB.php. So
+why so many other files? Some of the refactoring part-
+icularly in the binaries.php may not be compatible w-
+ith the rest of the codebase. So I've included (and 
+stripped down) the include files used so this code c-
+ould be isolated from the rest. As such there should
+be no problems with the site and the only possibility
+for interaction problems would be in the database ent-
+ries.  Keep in mind I could be wrong.  But I don't th-
+ink so.
+
+I KNOW THE RISKS/AM COOL WITH DEBUGGING
+---------------------------------------
+Awesome.  First thing to do is convert the parts
+and binary tables in your db to use InnoDB. To do
+that execute `php lib/innodb/convertToInnoDB.php`
+PLEASE NOTE: Depending on the size of your exisi-
+ting tables this could take a while. Let the scri-
+pt finish and do its thing.  
+
+I HAVE AN INNODB PARTS AND BINARIES NOW WHAT?
+---------------------------------------------
+Now you can use the nzb-import.php to import .nzb
+files into your tables. update_binaries should be
+used instead of the one under the update_scripts 
+folder.  The same goes for backfill.php.  You will
+probably want to modify your own screen script to
+make use of these files in an automatic type way.
+
+UPDATING RELEASES
+-----------------
+Update releases works the same as it did before.
+Use the old script to run update releases. I've 
+done nothing to improve its performance yet.
